@@ -38,6 +38,13 @@ export class TaskService {
     });
   }
 
+  findByUserId(userId: number) {
+    return this.taskRepository.find({
+      where: { assignee: { id: userId } },
+      relations: ['assignee'],
+    });
+  }
+
   async update(id: number, updateTaskDto: UpdateTaskDto) {
     let assignee = null;
     if (updateTaskDto.assignee) {
